@@ -5,6 +5,7 @@ package myServlet;
 
 import javax.servlet.ServletException;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,14 +14,13 @@ import java.io.IOException;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-
+@WebServlet("/mainServlet")
 public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", "*");
-
 
         String AA = (String) req.getParameter("A");
         try {
@@ -38,8 +38,7 @@ public class MainServlet extends HttpServlet {
             double Y = (-B - S) / (2 * A);
 
             String responseToClient = "<data><X>" + X + "</X><Y>" + Y + "</Y></data>";
-
-
+            
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("text/xml");
             resp.getWriter().write(responseToClient);
